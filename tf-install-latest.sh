@@ -54,12 +54,20 @@ else
   echo "No existing version found. Continuing."
 fi
 
+
 # extract the file
 echo "Extracting zip file..."
 sudo unzip $TF_ZIP -d $TERRAFORM_DIR
 
+# check that the file exists
 validate_file $TERRAFORM_FILE
 
-echo "Script completing.  Running `terraform --version` to validate installation..."
+echo "Install complete.  Validating installation..."
 
 terraform --version
+
+echo "Performing cleanup..."
+rm $TF_ZIP
+
+echo "Done."
+echo ""
