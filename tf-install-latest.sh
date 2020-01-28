@@ -1,22 +1,6 @@
-#######################################################
-##################     FUNCTIONS     ##################
-#######################################################
+#!/bin/bash
 
-function validate_file() {
-  local file=$1
-  
-  if [ ! -f $file ]; then
-    echo "No file $file found.  Exiting."
-  fi  
-}
-
-function validate_val() {
-  local $val=$1
-
-  if [ -z "$val" ] || [ "$val" == "null" ] ; then
-    echo "Value was empty or null.  Exiting."
-  fi
-}
+source utils.sh
 
 #######################################################
 #################     EXECUTIONS     ##################
@@ -27,10 +11,16 @@ TERRAFORM_DIR="/usr/local/bin/"
 TERRAFORM_FILE="${TERRAFORM_DIR}/terraform"
 
 
+# original jq found here as a cute one-liner: https://github.com/hashicorp/terraform/issues/9803#issuecomment-257903082
 echo "Retrieving download url..."
-FILE_URL=`echo "https://releases.hashicorp.com/terraform/$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r -M '.current_version')/terraform_$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r -M '.current_version')_linux_amd64.zip"`
 
-validate_val $FILE_URL
+curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r '. as $obj | "\($obj.current_download_url) \($obj.current_version)"' | while read latest_url latest_version; do
+  validate_val "latest download url" $latest_url
+  validate_val "latest version" $latest_version
+  
+  FILE_NAME="terraform_${latest_version}_linux_amd64.zip"
+  FILE_URL="${latest_url}${FILE_NAME}"
+done
 
 echo $FILE_URL
 echo ""
