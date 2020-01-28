@@ -25,6 +25,9 @@ elif [ "$ACTION" == "update" ]; then
   echo "ACTION WAS UPDATE"
   gcloud container clusters update $CLUSTER_NAME --update-addons=NetworkPolicy=ENABLED
   gcloud container clusters update $CLUSTER_NAME --enable-network-policy
+elif [ $ACTION == "delete" ]; then
+  echo "ACTION WAS DELETE"
+  gcloud container clusters delete $CLUSTER_NAME
 else
-  echo "WTF, ACTION WAS $ACTION"
+  echo "No valid action was passed: Instead, recieved $ACTION"
 fi
