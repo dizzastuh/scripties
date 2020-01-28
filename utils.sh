@@ -17,6 +17,6 @@ function validate_val() {
   local $val=$2
 
   if [ -z "$val" ] || [ "$val" == "null" ] ; then
-    echo "Value was empty or null.  Exiting."
+    echo "Value for '$val_name' was empty or null.  Exiting."
   fi
 }
