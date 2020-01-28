@@ -16,9 +16,9 @@ function validate_val() {
   local val_name=$1
   local val=$2
 
-  echo $val
-
   if [ -z "$val" ] || [ "$val" == "null" ] ; then
     echo "Value for '$val_name' was empty or null.  Exiting."
+  else
+    echo "Value '$val' was accepted for '$val_name'"
   fi
 }
