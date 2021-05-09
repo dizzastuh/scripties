@@ -16,6 +16,8 @@ The file should look like this:
 ]
 ```
 
+This directory also includes a template `JSON` file for your convenience.
+
 Each of streams included in the config will be downloaded in parallel to the current directory.  **SO MAKE SURE YOUR SYSTEM CAN WRITE TO THE CURRENT DIRECTORY.**
 
 ## Installation
