@@ -1,2 +1,3 @@
-# scripties
-misc utils
+# Scripties
+
+friendly lil utils
