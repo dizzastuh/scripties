@@ -1,11 +1,10 @@
-
-import { forEach } from "./stream-input.json";
-import m3u8ToMp4 from "m3u8-to-mp4";
+const streams = require("./stream-input.json")
+var m3u8ToMp4 = require("m3u8-to-mp4");
 var converter = new m3u8ToMp4();
 
-forEach(stream => {
+streams.forEach(stream => {
   (async function() {
-    console.log(`Converting ${stream.name}`);
+    console.log(`Converting ${stream.name}...`);
 
     await converter
       .setInputFile(stream.src)
