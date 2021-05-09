@@ -1,8 +1,14 @@
-param($minutes = 60)
+Clear-Host
+Echo "Keep-alive with Scroll Lock..."
 
-$myshell = New-Object -com "Wscript.Shell"
+$WShell = New-Object -com "Wscript.Shell"
 
-for ($i = 0; $i -lt $minutes; $i++) {
-  Start-Sleep -Seconds 60
-  $myshell.sendkeys(".")
+function sendScrollLock {
+  $WShell.sendkeys("{SCROLLLOCK}")
+  Start-Sleep -s 15
+}
+
+while ($true)
+{  
+  sendScrollLock
 }
